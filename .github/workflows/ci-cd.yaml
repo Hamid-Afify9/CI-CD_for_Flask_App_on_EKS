@@ -30,7 +30,7 @@ jobs:
     #     working-directory: app 
 
       - name: Build Docker image
-        run: docker push hamidafify/flask-api # Replace placeholders
+        run: docker build hamidafify/flask-api # Replace placeholders
         working-directory: app
 
       - name: Login to Docker Hub (if pushing)
