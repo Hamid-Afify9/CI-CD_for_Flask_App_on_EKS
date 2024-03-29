@@ -86,20 +86,14 @@ module "eks" {
   manage_aws_auth_configmap = true
   aws_auth_roles = [
     {
-      rolearn  = ["arn:aws:iam::633840464354:user/medo"]
-      username = ["medo"]
+      rolearn  = ["arn:aws:iam::633840464354:user/medo", module.eks_admins_iam_role.iam_role_arn]
+      username = ["medo", module.eks_admins_iam_role.iam_role_name]
       groups   = ["system:masters"]
     }
   ]
     }
   
-  # aws_auth_roles = [
-  #   {
-  #     rolearn  = ["arn:aws:iam::633840464354:user/medo"]
-  #     username = ["medo"]
-  #     groups   = ["system:masters"]
-  #   }
-  # ]
+
   }
   
 tags = {
