@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r ${{ env.REQUIREMENTS_FILE }}
-          working-directory: app  
+        working-directory: app  
 
 
     #   - name: Run tests
