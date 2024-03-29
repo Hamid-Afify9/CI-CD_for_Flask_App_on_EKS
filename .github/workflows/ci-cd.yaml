@@ -73,5 +73,6 @@ jobs:
         # Replace with your specific deployment approach (omit if using Terraform for EKS)
         run: |
           aws eks update-kubeconfig --name ${{ env.eks_cluster_name  }}
-          kubectl apply -f deployment.yaml  # Example deployment file
+          kubectl create deployment flask-api --image=hamidafify/flask-api
+          kubectl expose deploment flask-api --name=flask-svc --type=LoadBalancer --port=80 --target-port=5000
           # Deploy using kubectl 
