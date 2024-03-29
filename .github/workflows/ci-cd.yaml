@@ -24,7 +24,7 @@ jobs:
         working-directory: app
 
       - name: Build Docker image
-        run: docker build -t <your-dockerhub-username>/<your-app-name> .  # Replace placeholders
+        run: docker push hamidafify/flask-api # Replace placeholders
         working-directory: app
 
       - name: Login to Docker Hub (if pushing)
@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Push Docker image (if pushing)
-        run: docker push <your-dockerhub-username>/<your-app-name>  # Replace placeholders
+        run: docker push hamidafify/flask-api  # Replace placeholders
 
   deploy-to-eks:
     runs-on: ubuntu-latest
@@ -66,6 +66,6 @@ jobs:
       - name:  Deploy Docker image to EKS using kubectl 
         # Replace with your specific deployment approach (omit if using Terraform for EKS)
         run: |
-          aws eks update-kubeconfig --name ${{ env.eks-cluster-name  }}
+          aws eks update-kubeconfig --name ${{ env.eks_cluster_name  }}
           kubectl apply -f deployment.yaml  # Example deployment file
           # Deploy using kubectl 
