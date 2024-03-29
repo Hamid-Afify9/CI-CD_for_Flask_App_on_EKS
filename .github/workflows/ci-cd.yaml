@@ -26,12 +26,13 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m unittest discover -s app/tests -p 'test_*.py'
+          python -m unittest discover -s tests -p 'test_*.py'
         working-directory: app 
 
       - name: Build Docker image
-        run: docker build hamidafify/flask-api 
+        run: docker build -t hamidafify/flask-api .
         working-directory: app
+
 
       - name: Login to Docker Hub (if pushing)
         uses: docker/login-action@v2
@@ -42,37 +43,37 @@ jobs:
       - name: Push Docker image (if pushing)
         run: docker push hamidafify/flask-api  
 
-  deploy-to-eks:
-    runs-on: ubuntu-latest
-    needs: build-test-push  
-    environment:
-      name: production  
-    steps:
-      - uses: actions/checkout@v3
+#   deploy-to-eks:
+#     runs-on: ubuntu-latest
+#     needs: build-test-push  
+#     environment:
+#       name: production  
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Install AWS CLI
-        run: |
-            curl -sL https://raw.githubusercontent.com/aws/aws-cli/v2/installer/linux/x86_64/install-aws-cli.sh | sudo bash
-            sudo mv ~/.aws/credentials /tmp/aws_credentials  # Temporarily move credentials
-            echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> /tmp/aws_credentials
-            echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> /tmp/aws_credentials
-            aws configure set region <your-aws-region>  # Replace with your region
-            sudo mv /tmp/aws_credentials ~/.aws/credentials  # Move credentials back
+#       - name: Install AWS CLI
+#         run: |
+#             curl -sL https://raw.githubusercontent.com/aws/aws-cli/v2/installer/linux/x86_64/install-aws-cli.sh | sudo bash
+#             sudo mv ~/.aws/credentials /tmp/aws_credentials  # Temporarily move credentials
+#             echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> /tmp/aws_credentials
+#             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> /tmp/aws_credentials
+#             aws configure set region <your-aws-region>  # Replace with your region
+#             sudo mv /tmp/aws_credentials ~/.aws/credentials  # Move credentials back
 
-      - name: Initialize Terraform
-        uses: hashicorp/terraform-action@v2
-        with:
-          auto-approve: true 
+#       - name: Initialize Terraform
+#         uses: hashicorp/terraform-action@v2
+#         with:
+#           auto-approve: true 
 
-      - name: Apply Terraform configuration (optional, for EKS cluster deployment)
-        uses: hashicorp/terraform-action@v2
-        with:
-          command: apply
-          working-directory: AWS_EKS
-      - name:  Deploy Docker image to EKS using kubectl 
+#       - name: Apply Terraform configuration (optional, for EKS cluster deployment)
+#         uses: hashicorp/terraform-action@v2
+#         with:
+#           command: apply
+#           working-directory: AWS_EKS
+#       - name:  Deploy Docker image to EKS using kubectl 
         
-        run: |
-          aws eks update-kubeconfig --name ${{ env.eks_cluster_name  }}
-          kubectl create deployment flask-api --image=hamidafify/flask-api
-          kubectl expose deploment flask-api --name=flask-svc --type=LoadBalancer --port=80 --target-port=5000
-          # Deploy using kubectl 
+#         run: |
+#           aws eks update-kubeconfig --name ${{ env.eks_cluster_name  }}
+#           kubectl create deployment flask-api --image=hamidafify/flask-api
+#           kubectl expose deploment flask-api --name=flask-svc --type=LoadBalancer --port=80 --target-port=5000
+#           # Deploy using kubectl 
