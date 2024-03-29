@@ -1,0 +1,12 @@
+#ignore files
+    
+    
+.terraform
+.terraform/modules
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars   
+terraform.tfvars.json
+aws-auth.yaml
+aws-auth2.yaml
+cluster-info.yaml

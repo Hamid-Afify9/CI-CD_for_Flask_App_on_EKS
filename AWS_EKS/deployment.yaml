@@ -1,0 +1,28 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: my-frontend
+# spec:
+#   replicas: 1  # Number of pod replicas
+#   selector:
+#     matchLabels:
+#       app: my-frontend  # Label selector for pods
+#   template:
+#     metadata:
+#       labels:
+#         app: my-frontend  # Labels for the pod template
+#     spec:
+#       containers:
+#       - name: my-frontend  # Name of the container in the pod
+#         image: nginx
+#         ports:
+#         - containerPort: 80
+#           name: http
+#           protocol: TCP
+#         resources:
+#           requests:
+#             memory: "64Mi"
+#             cpu: "250m"
+#           limits:
+#             memory: "128Mi"
+#             cpu: "500m"
