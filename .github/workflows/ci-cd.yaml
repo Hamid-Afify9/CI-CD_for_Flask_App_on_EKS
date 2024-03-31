@@ -91,9 +91,6 @@ jobs:
         #   run: terraform apply --auto-approve
         #   working-directory: AWS_EKS  
 
-        
-  
-    
             
         # - name: Install kubectl
         #   uses: azure/setup-kubectl@v2.0
