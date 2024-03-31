@@ -52,7 +52,7 @@ module "eks" {
       most_recent = true
     }
   }
-
+  enable_irsa = true
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets          
  //control_plane_subnet_ids = ["subnet-xyzde987", "subnet-slkjf456", "subnet-qeiru789"]
@@ -66,8 +66,8 @@ module "eks" {
   eks_managed_node_groups = {
     general = {
       min_size     = 1
-      max_size     = 2
-      desired_size = 2
+      max_size     = 1
+      desired_size = 1
 
       instance_types = ["t2.micro"]
       capacity_type  = "ON_DEMAND"

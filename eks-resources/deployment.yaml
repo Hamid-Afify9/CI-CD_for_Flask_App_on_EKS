@@ -1,0 +1,44 @@
+#load-balancer-service-manifest-to-expose-the-deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  selector:
+    app: flask-app  # This is the label of the deployment
+---
+# k8s-deployment-manifest
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-dep
+  lables:
+    app: flask-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: hamidafify/flask-api:v1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m" 
