@@ -76,15 +76,15 @@ jobs:
           run: terraform init
           working-directory: AWS_EKS
 
-        - name: Terraform Plan
-          run: terraform plan
-          working-directory: AWS_EKS
+        # - name: Terraform Plan
+        #   run: terraform plan
+        #   working-directory: AWS_EKS
 
-        - name: Upload Terraform Plan Artifact
-          uses: actions/upload-artifact@v3
-          with:
-           name: Terraform Plan  # Name of the artifact 
-           path: AWS_EKS/tfplan.out 
+        # - name: Upload Terraform Plan Artifact
+        #   uses: actions/upload-artifact@v3
+        #   with:
+        #    name: Terraform Plan  # Name of the artifact 
+        #    path: AWS_EKS/tfplan.out 
            
 
         # - name: Applying Terraform
