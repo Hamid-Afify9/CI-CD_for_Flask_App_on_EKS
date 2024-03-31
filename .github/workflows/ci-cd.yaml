@@ -67,13 +67,17 @@ jobs:
           run: terraform init
           working-directory: AWS_EKS
 
-        - name: Terraform Plan
-          run: terraform plan
-          working-directory: AWS_EKS
-  
-        - name: Terraform Apply
+        # - name: Terraform Plan
+        #   run: terraform plan
+        #   working-directory: AWS_EKS
+        
+        - name: Initialize Terraform
           run: terraform apply --auto-approve
-          working-directory: AWS_EKS
+          working-directory: AWS_EKS  
+
+        
+  
+    
             
         - name: Install kubectl
           uses: azure/setup-kubectl@v2.0
