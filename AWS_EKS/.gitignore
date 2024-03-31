@@ -10,3 +10,4 @@ terraform.tfvars.json
 aws-auth.yaml
 aws-auth2.yaml
 cluster-info.yaml
+.terraform.*
