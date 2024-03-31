@@ -4,8 +4,7 @@
 .terraform
 .terraform/modules
 terraform.tfstate
-terraform.tfstate.backup
-terraform.tfvars   
+terraform.tfstate.backup  
 terraform.tfvars.json
 aws-auth.yaml
 aws-auth2.yaml
