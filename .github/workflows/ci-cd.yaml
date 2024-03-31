@@ -77,7 +77,7 @@ jobs:
           working-directory: AWS_EKS
 
         - name: Terraform Plan
-          run: terraform plan -out=tfplan
+          run: terraform plan -out=tfplan -lock=false
           working-directory: AWS_EKS
 
         - name: Upload Terraform Plan Artifact
