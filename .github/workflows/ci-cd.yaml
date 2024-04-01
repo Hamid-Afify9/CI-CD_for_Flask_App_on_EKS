@@ -100,8 +100,27 @@ jobs:
         - name:  Deploy Docker image to EKS using kubectl As a Deployment
           run: |
             aws eks update-kubeconfig --name ${{ vars.EKS_CLUSTER_NAME  }} --region ${{ vars.REGION }}
-            kubectl apply -f eks-resources/deployment.yaml
+            kubectl create-f eks-resources/deployment.yaml
+            kubectl get nodes
             kubectl get svc flask-svc
             kubectl get pods
-            kubectl get deployments
-  
+            kubectl get deploy
+
+        - name:  deleting resources
+          run: |
+            kubectl delete -f eks-resources/deployment.yaml   
+
+  rolling-back:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Initialize Terraform
+      run: terraform init
+
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve
