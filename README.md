@@ -1,2 +1,2 @@
-cicd-deploy flask app..
+cicd-deploy flask app...
 .
