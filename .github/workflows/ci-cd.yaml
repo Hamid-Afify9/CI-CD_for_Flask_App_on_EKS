@@ -87,21 +87,21 @@ jobs:
            path: AWS_EKS/tfplan
            
 
-        # - name: Applying Terraform
-        #   run: terraform apply --auto-approve
-        #   working-directory: AWS_EKS  
+        - name: Applying Terraform
+          run: terraform apply --auto-approve
+          working-directory: AWS_EKS  
 
             
-        # - name: Install kubectl
-        #   uses: azure/setup-kubectl@v2.0
-        #   with:
-        #     version: 'v1.24.0'
+        - name: Install kubectl
+          uses: azure/setup-kubectl@v2.0
+          with:
+            version: 'v1.24.0'
         
-        # - name:  Deploy Docker image to EKS using kubectl As a Deployment
-        #   run: |
-        #     aws eks update-kubeconfig --name ${{ vars.EKS_CLUSTER_NAME  }} --region ${{ vars.REGION }}
-        #     kubectl apply -f eks-resourcess/deployment.yaml
-        #     kubectl get svc flask-svc
-        #     kubectl get pods
-        #     kubectl get deployments
+        - name:  Deploy Docker image to EKS using kubectl As a Deployment
+          run: |
+            aws eks update-kubeconfig --name ${{ vars.EKS_CLUSTER_NAME  }} --region ${{ vars.REGION }}
+            kubectl apply -f eks-resourcess/deployment.yaml
+            kubectl get svc flask-svc
+            kubectl get pods
+            kubectl get deployments
   
