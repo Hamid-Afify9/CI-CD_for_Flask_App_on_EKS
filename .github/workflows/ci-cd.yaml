@@ -106,7 +106,7 @@ jobs:
           run: |
             echo "Waiting for the deployment to be ready..."
             sleep 15
-            kubectl wait --for=condition=available --timeout=60s deployment/flask-dep
+            kubectl wait --for=condition=available   --timeout=60s deployment/flask-dep
             echo "Deployment is ready!"
             kubectl get deploy,svc -l app=flask-app
 
@@ -118,7 +118,8 @@ jobs:
 
         - name:  deleting resources
           run: |
-            kubectl delete -f eks-resources/deployment.yaml   
+            kubectl delete -f eks-resources/deployment.yaml  
+            sleep 10 
 
   Rolling_Back:
     runs-on: ubuntu-latest
