@@ -62,6 +62,7 @@ Refer to the documentation for creating workflows: (https://docs.github.com/en/a
     └── workflows/
         └── cicd.yml  # Optional workflow file for CI/CD pipeline 
 
+
 ###    Explanation:
 
 app/: Contains the source code for your Flask application.
