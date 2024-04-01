@@ -108,7 +108,7 @@ jobs:
             sleep 15
             kubectl wait --for=condition=available --timeout=60s deployment/flask-dep
             echo "Deployment is ready!"
-            kubectl get deploy,svc
+            kubectl get deploy,svc -l app=flask-app
 
         # - name:   wait for the deployment to be ready  
         #   uses: GuillaumeFalourd/wait-sleep-action@v1
