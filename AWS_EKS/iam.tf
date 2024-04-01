@@ -15,8 +15,11 @@ module "allow_eks_access_iam_policy" {
         Effect   = "Allow"
         Resource = "*"
       },
+      
     ]
+    
   })
+  
 }
 
 module "eks_admins_iam_role" {
@@ -70,6 +73,7 @@ module "allow_assume_eks_admins_iam_policy" {
       },
     ]
   })
+  
 }
 
 
@@ -83,4 +87,6 @@ module "eks_admins_iam_group" {
   create_group                      = true
   group_users                       = [module.cicd_iam_user.iam_user_name]
   custom_group_policy_arns          = [module.allow_assume_eks_admins_iam_policy.arn]
+
+  force_destroy = true
 }

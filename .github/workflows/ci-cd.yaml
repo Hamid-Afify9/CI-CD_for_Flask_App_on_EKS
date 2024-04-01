@@ -112,6 +112,7 @@ jobs:
 
   rolling-back:
     runs-on: ubuntu-latest
+    needs: deploy-to-eks
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -121,6 +122,8 @@ jobs:
 
     - name: Initialize Terraform
       run: terraform init
+      working-directory: AWS_EKS 
 
     - name: Terraform Destroy
       run: terraform destroy -auto-approve
+      working-directory: AWS_EKS 
