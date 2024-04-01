@@ -1,8 +1,14 @@
 name: CI/CD for Flask App on EKS
 
 on:
-  push:
-    branches: [ main ]
+    workflow_dispatch:
+    
+        # push:
+    #     branches:
+    #         - main    
+    # pull_request:
+    #     branches:
+    #         - main
 
 jobs:
   build-test-push:
