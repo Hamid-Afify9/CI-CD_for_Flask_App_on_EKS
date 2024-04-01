@@ -35,6 +35,11 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
+        toleration:
+        - key: "market"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
         resources:
           requests:
             memory: "64Mi"
