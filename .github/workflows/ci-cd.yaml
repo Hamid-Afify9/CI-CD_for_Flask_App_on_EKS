@@ -100,9 +100,9 @@ jobs:
         - name:  Deploy Docker image to EKS using kubectl As a Deployment
           run: |
             aws eks update-kubeconfig --name ${{ vars.EKS_CLUSTER_NAME  }} --region ${{ vars.REGION }}
-            kubectl create-f eks-resources/deployment.yaml
+            kubectl create -f eks-resources/deployment.yaml
             kubectl get nodes
-            kubectl get svc flask-svc
+            kubectl get svc flask-app-svc
             kubectl get pods
             kubectl get deploy
 
