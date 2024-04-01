@@ -47,20 +47,20 @@ Refer to the documentation for creating workflows: (https://docs.github.com/en/a
 ##  **Directory Structure**
 
  ####   CI-CD_for_Flask_App_on_EKS 
+CI-CD_for_Flask_App_on_EKS  # Notice the double space after the dash
 ├── README.md  # This file
-├── app/         # Flask application source code
+├── app/        # Flask application source code
 │   ├── main.py
 │   └── ...      # Other application files
-├── Dockerfile   # Docker build instructions for the Flask app
-├── .env         # Environment variables (ignored by Git)
+├── Dockerfile  # Docker build instructions for the Flask app
+├── .env        # Environment variables (ignored by Git)
 ├── run_tests.sh # Optional script to run application tests
 ├── build_and_push_docker_image.sh # Optional script to build and push Docker image
-├── terraform/    # Terraform configuration for infrastructure provisioning
+├── terraform/  # Terraform configuration for infrastructure provisioning
 │   ├── main.tf
 │   └── ...      # Other Terraform configuration files
-└── .github/     # GitHub Actions configurations (optional)
-    └── workflows/
-        └── cicd.yml  # Optional workflow file for CI/CD pipeline 
+└── .github/    # GitHub Actions configurations (optional)
+└── workflows/
 
 
 ###    Explanation:
