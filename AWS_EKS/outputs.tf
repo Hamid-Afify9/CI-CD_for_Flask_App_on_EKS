@@ -7,4 +7,6 @@ output "availability_zones" {
 }
 
 
-
+output "Rds_Endpoint"{
+    value = aws_db_instance.db_instance.endpoint
+}
